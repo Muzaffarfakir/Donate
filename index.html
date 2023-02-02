@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>HTML</title>
+
+  <!-- HTML -->
+
+
+  <!-- Custom Styles -->
+  <style>
+    body {
+      font-size: 15pt;
+      background: linear-gradient(#AFB6FF, #FFAFEB);
+      height: 100vh;
+    }
+
+    input {
+      margin-top: 40px;
+      text-align: center;
+      width: 100%;
+      height: 32px;
+      margin: center;
+      border: 1px solid black;
+      border-radius: 6px;
+      outline-color: #AFB6FF;
+    }
+
+    #paypal-button-container {
+      margin-top: 40px;
+      text-align: center;
+
+
+    }
+
+    h3 {
+      text-align: center;
+    }
+
+    h4 {
+      text-align: center;
+    }
+
+    h6 {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Project -->
+  <h3>Donate please</h3>
+  <input type="number" id="amount">
+  <div id="smart-button-container">
+    <div style="text-align: center;">
+      <div id="paypal-button-container"></div>
+    </div>
+  </div>
+  <h4>
+    Donation is necessary its help to all poor people who can not afford food shelter
+  </h4>
+  <h4>“Money is not the only commodity that is fun to give. We can give time, we can give our expertise, we can give our love, or simply give a smile. What does that cost? The point is, none of us can ever run out of something worthwhile to give"</h4>
+  <h6>
+    Donation is the act of giving money, goods or time to an organization or individual in need. It is a fundamental aspect of philanthropy and a powerful way for individuals and organizations to make a positive impact on the world.Donations can come in many forms, from monetary and contributions to in-kind donations of goods or many services. They can also be made to a wide range of recipients, including non-profit organizations, charities, educational institutions, and individuals in need.
+    Donations can also provide a sense of personal fulfillment and satisfaction for the donors. By giving to others, donors can feel a sense of purpose and meaning in their own lives, knowing that they are making a positive impact on the world. Additionally, donating to a cause that aligns with the donor's values and beliefs can be a powerful way to express those values and make a meaningful impact.
+
+    While donating can have many benefits, it is essential that donors take the time to research the organizations and causes they choose to support. This ensures that their donations are being used effectively and that the organization is reputable and trustworthy.
+    In conclusion, donation is a powerful way for individuals and organizations to make a positive impact on the world. It can help to improve the lives of others and provide a sense of personal fulfillment for donors. By taking the time to research the organizations and causes they support, donors can ensure that their donations are used effectively and that they are making a meaningful difference in the world.
+
+    <h6>
+      If We Help Someone At Their Bad Time Then God Help Us At our Bad Time So Help The People Who need Help.
+      from Below Button You Can Donate
+    </h6>
+    <h6>
+      This website help to one child ngo name mnfcharity so please us to provide food or shelter to them thank hope you understand .
+    </h6>
+    <script src="https://www.paypal.com/sdk/js?client-id=AdMkuYhVaodSO9sWZ7p1xqTRTsgI937-HEDz211SHNgOAcCKTLEH08rcKQlkA-1uRexv5G_bR5k0ZjC6&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+    <script>
+      let amount = document.getElementById("amount")
+
+      function initPayPalButton() {
+        paypal.Buttons({
+          style: {
+            shape: 'pill',
+            color: 'silver',
+            layout: 'vertical',
+            label: 'paypal',
+
+          },
+
+          createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [{ "amount": { "currency_code": "USD", "value": amount.value } }]
+            });
+          },
+
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(orderData) {
+
+              // Full available details
+              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+              // Show a success message within this page, e.g.
+              const element = document.getElementById('paypal-button-container');
+              element.innerHTML = '';
+              element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+              // Or go to another URL:  actions.redirect('thank_you.html');
+
+            });
+          },
+
+          onError: function(err) {
+            console.log(err);
+          }
+        }).render('#paypal-button-container');
+      }
+      initPayPalButton();
+    </script>
+</body>
+
+</html>
